@@ -1,60 +1,51 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <app-css-grid v-if="isCssGrid"></app-css-grid>
+    <app-flexbox v-if="!isCssGrid"></app-flexbox>
+    <app-switcher
+      class="switcher-wrapper"
+      :is-css-grid="isCssGrid"
+      @toggled="onToggle"
+    ></app-switcher>
   </div>
 </template>
 
 <script>
+import CssGrid from "./components/CssGrid";
+import Switcher from "./components/Switcher";
+import FlexboxGrid from "./components/FlexboxGrid";
+
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      isCssGrid: true
+    }
+  },
+  components: {
+    'app-css-grid': CssGrid,
+    'app-flexbox': FlexboxGrid,
+    'app-switcher': Switcher
+  },
+  methods: {
+    onToggle() {
+      console.log('here');
+      this.isCssGrid = !this.isCssGrid;
     }
   }
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" scoped>
 
-h1, h2 {
-  font-weight: normal;
-}
+  #app {
+    min-height: inherit;
+    height: 1px;
+  }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+  .switcher-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+  }
 </style>
