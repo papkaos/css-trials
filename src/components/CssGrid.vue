@@ -3,17 +3,15 @@
     <div class="grid-header grid-box">
       <app-menu></app-menu>
     </div>
-    <div class="grid-main">
-      <aside class="grid-sidebar grid-box">Sidebar</aside>
-      <div class="grid-content grid-box">
-        <div class="grid-content-list">
-          <div
-            class="grid-content-item"
-            v-for="post in posts"
-          >
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.body }}</p>
-          </div>
+    <aside class="grid-sidebar grid-box">Sidebar</aside>
+    <div class="grid-content grid-box">
+      <div class="grid-content-list">
+        <div
+          class="grid-content-item"
+          v-for="post in posts"
+        >
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.body }}</p>
         </div>
       </div>
     </div>
@@ -53,17 +51,15 @@
   .grid-page {
     display: grid;
     grid-template-rows: 58px auto 58px;
+    grid-template-columns: 260px auto;
     min-height: inherit;
   }
 
   .grid-header {
+    grid-column: 1 / -1;
+    grid-row: 1;
     background-color: #67a4ff;
     z-index: 99;
-  }
-
-  .grid-main {
-    display: grid;
-    grid-template-columns: 260px auto;
   }
 
   .grid-sidebar {
@@ -83,6 +79,8 @@
   }
 
   .grid-footer {
+    grid-column: 1 / -1;
+    grid-row: 3;
     background-color: #67a4ff;
   }
 </style>
